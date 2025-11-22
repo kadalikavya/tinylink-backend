@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>TinyLink Dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body class="bg-gray-100 p-6">
+    <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold mb-6">TinyLink Dashboard</h1>
+
+        <form id="linkForm" class="space-y-4 mb-8">
+            <input id="url" type="text" placeholder="Enter long URL" class="w-full p-2 border rounded" />
+            <input id="code" type="text" placeholder="Custom code (6–8 chars, optional)"
+                class="w-full p-2 border rounded" />
+            <button class="w-full bg-blue-600 text-white p-2 rounded">Create Short Link</button>
+            <p id="message" class="text-sm text-center"></p>
+        </form>
+
+        <div class="overflow-x-auto">
+            <table class="w-full border">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="p-2">Code</th>
+                        <th class="p-2">URL</th>
+                        <th class="p-2">Clicks</th>
+                        <th class="p-2">Last Clicked</th>
+                        <th class="p-2">Stats</th>
+                        <th class="p-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="linksTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>

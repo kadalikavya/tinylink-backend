@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>TinyLink - Stats</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body class="bg-gray-100 p-6">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold mb-4">Link Statistics</h1>
+
+        <div id="loading">Loading…</div>
+        <div id="content" class="hidden">
+            <p><strong>Code:</strong> <span id="code"></span></p>
+            <p><strong>URL:</strong> <a id="url" target="_blank" rel="noopener"></a></p>
+            <p><strong>Clicks:</strong> <span id="clicks"></span></p>
+            <p><strong>Last clicked:</strong> <span id="last"></span></p>
+            <div class="mt-4">
+                <a id="open" class="bg-blue-600 text-white px-4 py-2 rounded inline-block">Open Link</a>
+            </div>
+        </div>
+
+        <div id="error" class="text-red-600 mt-4"></div>
+
+        <div class="mt-6">
+            <a href="/" class="text-blue-600">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        async function load() {
+            const parts = window.location.pathname.split("/");
+            const code = parts[2];
+            try {
+                const res = await fetch(`/api/links/${code}`);
+                if (!res.ok) {
+                    document.getElementById('loading').textContent = 'Link not found';
+                    return;
+                }
+                const data = await res.json();
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+                document.getElementById('code').textContent = data.code;
+                document.getElementById('url').textContent = data.url;
+                document.getElementById('url').href = data.url;
+                document.getElementById('open').href = data.url;
+                document.getElementById('clicks').textContent = data.clicks;
+                document.getElementById('last').textContent = data.last_clicked || 'Never';
+            } catch (err) {
+                document.getElementById('error').textContent = 'Error loading stats';
+            }
+        }
+        load();
+    </script>
+</body>
+
+</html>
