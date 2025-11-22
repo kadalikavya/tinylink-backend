@@ -3,7 +3,7 @@
 // Auto-detect backend URL (localhost vs production)
 const BASE_URL = window.location.origin.includes("localhost")
   ? "http://localhost:3000"       // Local backend
-  : "https://tinylink-backend-wfis.onrender.com/api/links"; // <-- Replace with your deployment backend URL
+  : "https://tinylink-backend-wfis.onrender.com"; // <-- Replace with your deployment backend URL
 
 console.log("Using API:", BASE_URL);
 
